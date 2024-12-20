@@ -1,7 +1,7 @@
 import requests
 import logging
 from datetime import datetime
-from src.config import WEBHOOK_URL, ROLE_ID
+from src.config import WEBHOOK_URL, ROLE_ID, DROP_URL
 
 def send_webhook_notification(round_number, event_title, round_status, start_date, end_date, image_url=None):
     """
@@ -13,7 +13,7 @@ def send_webhook_notification(round_number, event_title, round_status, start_dat
     if round_status.lower() == "event live":
         content = f"<@&{ROLE_ID}> New Rust drop round is live! 🎉"
     else:
-        content = "Rust drop round is live!"
+        content = f"New Rust drop round is on its way!"
 
     # Replace 'UTC' with ' +0000' for parsing and convert to ISO 8601 format
     start_date = start_date.replace(" UTC", " +0000")
@@ -34,6 +34,7 @@ def send_webhook_notification(round_number, event_title, round_status, start_dat
 
     embed = {
         "title": f"{round_number} - {event_title}",
+        "url": DROP_URL,
         "description": f"Status: {round_status}",
         "color": 65280,  # Green color
         "fields": [
