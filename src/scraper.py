@@ -26,7 +26,10 @@ def get_latest_drop():
     event_title = round_info_element.find("span", class_="round-info-title").text.strip()
 
     # Extract the round status
-    round_status = round_info_element.find("span", class_="round-info-live").text.strip()
+    if not round_info_element.find("span", class_="round-info-live"):
+        round_status = "Announced"
+    else:
+        round_status = round_info_element.find("span", class_="round-info-live").text.strip()
 
     # Find the event dates
     event_date_element = soup.find("div", class_="event-date")
