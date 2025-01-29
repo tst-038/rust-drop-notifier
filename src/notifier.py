@@ -13,7 +13,7 @@ def send_webhook_notification(round_number, event_title, round_status, start_dat
     if round_status.lower() == "event live":
         content = f"<@&{ROLE_ID}> New Rust drop round is live! 🎉"
     else:
-        content = f"New Rust drop round is on its way!"
+        content = f"New Rust drop round is on its way! 🚛💨"
 
     # Replace 'UTC' with ' +0000' for parsing and convert to ISO 8601 format
     start_date = start_date.replace(" UTC", " +0000")
@@ -35,7 +35,7 @@ def send_webhook_notification(round_number, event_title, round_status, start_dat
     embed = {
         "title": f"{round_number} - {event_title}",
         "url": DROP_URL,
-        "description": f"Status: {round_status}",
+        "description": f"**Status**: {round_status}",
         "color": 65280,  # Green color
         "fields": [
             {"name": "Start Date", "value": f"<t:{start_timestamp}>", "inline": True},
